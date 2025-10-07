@@ -37,7 +37,7 @@ body, html {
     align-items: center;
     padding-right: 30px;
     box-sizing: border-box;
-    z-index: 100; /* This is correctly on top */
+    z-index: 100;
 }
 
 .nav-item {
@@ -60,7 +60,13 @@ body, html {
     color: #F22A9B;
 }
 
-.camera {
+/* ============================================= */
+/* =========== ALIGNMENT FIX APPLIED =========== */
+/* ============================================= */
+
+/* The link (<a>) tag now handles all positioning and sizing. */
+#cameraLink {
+    text-decoration: none;
     position: absolute;
     height: 250px;
     width: 250px;
@@ -68,27 +74,24 @@ body, html {
     top: 58%; 
     transform: translateX(-50%) translateY(-50%); 
     transition: transform 0.3s ease; 
+    z-index: 10; /* This keeps it clickable */
+}
+
+/* The hover effect is now on the link itself. */
+#cameraLink:hover {
+    transform: translateX(-50%) translateY(-50%) scale(1.1); 
+}
+
+/* The .camera div is now simple and just fills the link tag. */
+.camera {
+    width: 100%;
+    height: 100%;
 }
 
 .camera img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.camera:hover img {
-    transform: scale(1.1); 
-}
-
-/* ============================================= */
-/* ============= THE REQUIRED FIX ============== */
-/* ============================================= */
-#cameraLink {
-    text-decoration: none;
-    /* These two lines bring the link to the front */
-    position: relative; /* Required for z-index to apply */
-    z-index: 10;      /* Sets stacking order above other elements */
 }
 
 .sparkle {
@@ -98,7 +101,7 @@ body, html {
     left: 59%;
     top: 44%; 
     transform: translateX(-50%) translateY(-50%); 
-    z-index: 1; /* Keep this behind the camera link */
+    z-index: 1; 
 }
 
 .sparkle img {
@@ -114,7 +117,7 @@ body, html {
     left: 40%;
     top: 57%; 
     transform: translateX(-50%) translateY(-50%); 
-    z-index: 1; /* Keep this behind the camera link */
+    z-index: 1;
 }
 
 .sparkle2 img{
@@ -130,7 +133,7 @@ body, html {
     left: 59%;
     top: 56%; 
     transform: translateX(-50%) translateY(-50%); 
-    z-index: 2; /* Keep this behind the camera link */
+    z-index: 2;
 }
 
 .kissi img{
@@ -161,7 +164,7 @@ body, html {
     left: 42%;
     top: 42%; 
     transform: translateX(-50%) translateY(-50%) rotate(-20deg); 
-    z-index: 1; /* Keep this behind the camera link */
+    z-index: 1;
 }
 
 .bow img{
@@ -178,7 +181,7 @@ body, html {
     top: 60%; 
     font-size: 20px;
     font-weight: bold;
-    z-index: 2; /* Keep this behind the camera link */
+    z-index: 2;
 }
 
 /* Sparkle animation keyframes (No changes needed) */
@@ -234,7 +237,8 @@ body, html {
     .text {
         font-size: 18vw;
     }
-    .camera {
+    /* Adjust the link, not the .camera div */
+    #cameraLink {
         width: 200px;
         height: 200px;
         top: 60%;
@@ -275,3 +279,4 @@ body, html {
         font-size: 12px;
     }
 }
+
