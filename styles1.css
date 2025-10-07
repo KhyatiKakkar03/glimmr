@@ -1,0 +1,277 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+.container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #faf9f91c;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 30px;
+    box-sizing: border-box;
+    z-index: 100; /* This is correctly on top */
+}
+
+.nav-item {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin: 0 15px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+    color: #c56d87;
+}
+
+.text{
+    font-family: 'Italianno';font-size: 100px;
+    color: #F22A9B;
+}
+
+.camera {
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    left: 50.5%;
+    top: 58%; 
+    transform: translateX(-50%) translateY(-50%); 
+    transition: transform 0.3s ease; 
+}
+
+.camera img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.camera:hover img {
+    transform: scale(1.1); 
+}
+
+/* ============================================= */
+/* ============= THE REQUIRED FIX ============== */
+/* ============================================= */
+#cameraLink {
+    text-decoration: none;
+    /* These two lines bring the link to the front */
+    position: relative; /* Required for z-index to apply */
+    z-index: 10;      /* Sets stacking order above other elements */
+}
+
+.sparkle {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    left: 59%;
+    top: 44%; 
+    transform: translateX(-50%) translateY(-50%); 
+    z-index: 1; /* Keep this behind the camera link */
+}
+
+.sparkle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sparkle2{
+    position: absolute;
+    height: 103px;
+    width: 120px;
+    left: 40%;
+    top: 57%; 
+    transform: translateX(-50%) translateY(-50%); 
+    z-index: 1; /* Keep this behind the camera link */
+}
+
+.sparkle2 img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.kissi{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    left: 59%;
+    top: 56%; 
+    transform: translateX(-50%) translateY(-50%); 
+    z-index: 2; /* Keep this behind the camera link */
+}
+
+.kissi img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.kittypixel{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    left: 3%;
+    top: 2%; 
+    transform: translateX(-50%) translateY(-50%); 
+}
+
+.kittypixel img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bow{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    left: 42%;
+    top: 42%; 
+    transform: translateX(-50%) translateY(-50%) rotate(-20deg); 
+    z-index: 1; /* Keep this behind the camera link */
+}
+
+.bow img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.start{
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    left: 48%;
+    top: 60%; 
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 2; /* Keep this behind the camera link */
+}
+
+/* Sparkle animation keyframes (No changes needed) */
+@keyframes sparkle-small {
+    0%, 100% {
+        transform: translateX(-50%) translateY(-50%) scale(0.8);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-50%) scale(1);
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+    }
+}
+@keyframes sparkle-big {
+    0%, 100% {
+        transform: translateX(-50%) translateY(-50%) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-50%) scale(1.3);
+        opacity: 1;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1));
+    }
+}
+@keyframes float {
+    0%, 100% {
+        transform: translateX(-50%) translateY(-50%);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-53%);
+    }
+}
+.sparkle {
+    animation: 
+        sparkle-big 2s ease-in-out infinite,
+        float 3s ease-in-out infinite;
+}
+.sparkle2 {
+    animation: 
+        sparkle-small 1.8s ease-in-out infinite,
+        float 2.5s ease-in-out infinite;
+    animation-delay: 0.3s;
+}
+.sparkle img, .sparkle2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Your responsive styles (No changes needed) */
+@media (max-width: 768px) {
+    .text {
+        font-size: 18vw;
+    }
+    .camera {
+        width: 200px;
+        height: 200px;
+        top: 60%;
+    }
+    .start {
+        top: 62%;
+        font-size: 16px;
+    }
+    .sparkle {
+        width: 100px;
+        height: 100px;
+        left: 70%;
+        top: 48%;
+    }
+    .sparkle2 {
+        width: 80px;
+        height: 80px;
+        left: 28%;
+        top: 60%;
+    }
+    .bow {
+        width: 50px;
+        height: 50px;
+        left: 35%;
+        top: 45%;
+    }
+    .kissi {
+        width: 50px;
+        height: 50px;
+        left: 70%;
+        top: 58%;
+    }
+    .header {
+        padding-right: 10px;
+    }
+    .nav-item {
+        margin: 0 8px;
+        font-size: 12px;
+    }
+}

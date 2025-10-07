@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glimmr. Photobooth</title>
+    <link rel="stylesheet" href="photobooth.css">
+</head>
+<body>
+    <!-- Repositioned the back link to be fixed at the top-left -->
+    <a href="index.html" class="back-link-fixed">← Go Back</a>
+
+    <!-- This container holds the camera/capture view -->
+    <div id="captureContainer" class="photobooth-container">
+        <!-- Left side: Camera view -->
+        <div class="camera-container">
+            <video id="cameraFeed" autoplay playsinline></video>
+            <div id="countdown" class="countdown"></div>
+        </div>
+
+        <!-- Right side: Photo strip and controls -->
+        <div class="controls-container">
+            <h1>Photobooth</h1>
+            <div class="photo-strip">
+                <div class="photo-slot"></div>
+                <div class="photo-slot"></div>
+                <div class="photo-slot"></div>
+            </div>
+            <div class="timer-control">
+                <label for="timerToggle">Enable 3s Timer</label>
+                <input type="checkbox" id="timerToggle">
+            </div>
+            <div class="buttons">
+                <button id="captureBtn">Take Photo</button>
+            </div>
+             <!-- The old back link has been removed from here -->
+        </div>
+    </div>
+
+    <!-- This container holds the final editor view, hidden by default -->
+    <div id="editorContainer" class="editor-container" style="display:none;">
+        <canvas id="stripPreviewCanvas"></canvas>
+        <div class="edit-tools">
+            <div class="tool-section">
+                <h3>Border Color</h3>
+                <div class="color-swatches">
+                    <div class="color-swatch" style="background-color: white;" data-color="white"></div>
+                    <div class="color-swatch" style="background-color: black;" data-color="black"></div>
+                    <div class="color-swatch" style="background-color: #F09FB6;" data-color="#F09FB6"></div>
+                    <div class="color-swatch" style="background-color: #E6D1DC;" data-color="#E6D1DC"></div>
+                    <div class="color-swatch" style="background-color: #f7e369;" data-color="#f7e369"></div>
+                </div>
+            </div>
+            <!-- NEW: Sticker template section -->
+            <div class="tool-section">
+                <h3>Sticker Pack</h3>
+                <div class="sticker-templates">
+                    <div class="template-btn" data-template-id="0">None</div>
+                    <div class="template-btn" data-template-id="1">Dessert Dreamland</div>
+                    <div class="template-btn" data-template-id="2">Kiss & Glitter</div>
+                    <div class="template-btn" data-template-id="3">Ribbon Rave</div>
+                    <div class="template-btn" data-template-id="4">Fairy Floss</div>
+                </div>
+            </div>
+            <!-- The Undo button is removed -->
+            <div class="editor-buttons">
+                <button id="retakeBtn">Retake All</button>
+                <button id="saveBtn">Save Strip</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden canvas used for capturing photos -->
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <script src="photobooth.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,323 @@
+/* --- Keep all your existing styles from before --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #F09FB6, #E6D1DC);
+    color: white;
+    /* This is important to prevent scrolling on the page */
+    overflow: hidden; 
+}
+
+/* Make photobooth container fill the height */
+.photobooth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    height: 100%; /* Changed from min-height */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.camera-container {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    border: 5px solid white;
+    border-radius: 10px;
+    background-color: #333;
+}
+
+#cameraFeed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    transform: scaleX(-1); 
+}
+
+.countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 150px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    display: none;
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    font-family: 'Italianno', cursive;
+    color: #F22A9B;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+h1 { font-size: 60px; margin-bottom: 20px; }
+h2 { font-size: 40px; color: white; margin: 0 0 15px 0; } /* Adjusted size */
+h3 { font-size: 24px; margin-bottom: 5px; } /* Adjusted size */
+
+
+.photo-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.photo-slot {
+    width: 200px;
+    height: 150px;
+    background-color: #fff;
+    border: 3px dashed #F22A9B;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(1); /* Corrected from previous version */
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #F22A9B;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #c52e80;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.back-link {
+    display: none; /* Hide the old one if it's still there */
+}
+
+/* NEW: Style for the fixed back link */
+.back-link-fixed {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001; /* Make sure it's above everything */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.back-link-fixed:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* --- UPDATED STYLES FOR THE EDITOR --- */
+
+.editor-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* Use viewport height */
+    gap: 50px;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+/* The canvas will now be on the left */
+#stripPreviewCanvas {
+    border: 3px solid white;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    /* Set a max-height to ensure it fits on screen */
+    max-height: 90vh;
+    max-width: 50%;
+    object-fit: contain;
+}
+
+/* The tools will now be on the right */
+.edit-tools {
+    display: flex;
+    flex-direction: column; /* Stack tools vertically */
+    gap: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.tool-section {
+    text-align: center;
+}
+
+.color-swatches, .stickers {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+    transform: scale(1.1);
+}
+
+.sticker {
+    font-size: 40px;
+    cursor: grab;
+    padding: 5px;
+    user-select: none;
+    transition: transform 0.2s;
+}
+
+.sticker:hover {
+    transform: scale(1.2);
+}
+
+.sticker:active {
+    cursor: grabbing;
+}
+
+.editor-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons */
+    gap: 15px;
+    margin-top: 15px; /* Add space above buttons */
+}
+
+/* NEW: Sticker template styles */
+.sticker-templates {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.template-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+    color: #d13a8a;
+}
+
+/* NEW: Add this rule for the hover effect on non-selected buttons */
+.template-btn:hover {
+    background-color: #fce4ec; /* Light pink hover */
+}
+
+.template-btn.active {
+    background-color: #d7899f; /* A theme color */
+    color: black;
+    border-color: #d7899f;
+}
+
+/* NEW: Add this for a slightly darker hover on the selected button */
+.template-btn.active:hover {
+    background-color: #c56d87; 
+}
+
+@media (max-width: 850px) {
+    body {
+        overflow-y: auto; /* Allow vertical scroll on mobile */
+    }
+
+    .photobooth-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    #captureContainer, #editorContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .camera-container {
+        width: 95vw; /* Take up most of the screen width */
+        height: 71.25vw; /* Maintain 4:3 aspect ratio */
+        max-width: 640px; /* Don't get bigger than the original size */
+        max-height: 480px;
+    }
+
+    .photo-slots {
+        gap: 5px;
+    }
+    .photo-slot {
+        width: 80px;
+        height: 60px;
+    }
+
+    .title-header {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .back-link {
+        font-size: 14px;
+        top: 10px;
+        left: 10px;
+    }
+
+    /* Make editor preview canvas smaller but keep aspect ratio */
+    #stripPreviewCanvas {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .editor-controls h3 {
+        font-size: 14px;
+    }
+}
